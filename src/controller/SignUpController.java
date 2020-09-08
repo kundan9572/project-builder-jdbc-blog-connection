@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import utility.ConnectionManager;
+
 
 
 
@@ -28,6 +30,22 @@ public class SignUpController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Sign up Controller");
+		
+		ConnectionManager connectionManager = new ConnectionManager();
+		//Connection con =connectionManager.getConnection();
+		
+		Connection con = connectionManager.getConnection();
+		
+		if( con != null)
+		{
+			System.out.println("Connection established");
+		}
+		else
+		{
+			System.out.println(" Check your connection");
+		}
+		
+		
 		// Fill your code here
 		RequestDispatcher rd=this.getServletContext().getRequestDispatcher("/WEB-INF/views/signupView.jsp");
 		rd.forward(request,response);
